@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { NavLink, withRouter } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
@@ -11,8 +12,11 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ListItems from './ListItems';
-
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 
 const drawerWidth = 240;
 
@@ -79,6 +83,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
+    paddingTop: theme.spacing(8),
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -93,9 +98,35 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
+  links: {
+    color: 'primary',
+    textDecoration: 'none',
+  }
 }));
 
-export const Layout = ({ children }) => {
+const ExpertLinks = ({ className }) => [
+  {href: '/expert', title: 'Дашбоард'},
+  {href: '/order', title: 'Создание заявки'},
+  {href: '/padawans', title: 'Падаваны'},
+].map((item, index) => (
+  <NavLink 
+    key={item.href} 
+    to={item.href} 
+    className={className} 
+    activeStyle={{
+      fontWeight: "bold",
+      color: "red"
+    }} 
+  >
+    <ListItem button >
+      <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+      <ListItemText primary={item.title} />
+    </ListItem>
+  </NavLink>
+))
+
+export const Layout = withRouter(
+  ({ children, title, role }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -104,6 +135,10 @@ export const Layout = ({ children }) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const mapLinksWithRole = {
+    expert: <ExpertLinks className={classes.links} />
+  }
 
   return (
     <div className={classes.root}>
@@ -120,7 +155,7 @@ export const Layout = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -130,7 +165,6 @@ export const Layout = ({ children }) => {
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
         }}
         open={open}
-        anchor="right"
       >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
@@ -138,7 +172,9 @@ export const Layout = ({ children }) => {
           </IconButton>
         </div>
         <Divider />
-        <List>{ListItems}</List>
+        <List>
+          {mapLinksWithRole[role]}
+        </List>
       </Drawer>
       <main className={classes.content}>
         { children }
@@ -146,3 +182,4 @@ export const Layout = ({ children }) => {
     </div>
   );
 }
+)
