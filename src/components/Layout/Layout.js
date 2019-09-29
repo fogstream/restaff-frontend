@@ -143,6 +143,15 @@ const HRLinks = ({className}) => {
   return mapLinksToMenu(links, className)
 }
 
+const EmployeeLinks = ({className}) => {
+  const links = [
+    {href: '/employee', title: 'Дашбоард'},
+    {href: '/profile', title: 'Профиль'},
+    {href: '/positions', title: 'Должности'},
+  ]
+  return mapLinksToMenu(links, className)
+}
+
 export const Layout = withRouter(
   ({ children, title, role }) => {
   const classes = useStyles();
@@ -156,7 +165,8 @@ export const Layout = withRouter(
 
   const mapLinksWithRole = {
     expert: <ExpertLinks className={classes.links} />,
-    hr: <HRLinks className={classes.links} />
+    hr: <HRLinks className={classes.links} />,
+    employee: <EmployeeLinks className={classes.links} />
   }
 
   return (

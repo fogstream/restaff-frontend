@@ -18,6 +18,8 @@ import ExpertInfo from './components/HR/ExpertInfo'
 import PositionInfo from './components/HR/PositionInfo'
 
 import Login from './components/Login'
+import EmployeeDashboard from './components/Employee/EmployeeDashboard';
+import EmployeeProfile from './components/Employee/EmployeeProfile';
 
 import './App.css';
 
@@ -111,6 +113,17 @@ const App = () => {
           <Route 
             path='/position/:id'
             render={() => <Layout title='Должность' role="hr"><PositionInfo /></Layout>} 
+          />
+           <Route 
+              path='/employee'
+              exact
+              render={() => <Layout title='Дашбоард'  role="employee">
+                <EmployeeDashboard />
+              </Layout>} 
+            />
+          <Route 
+            path='/profile'
+            render={() => <Layout title='Профиль' role="employee"><EmployeeProfile /></Layout>} 
           />
         </Switch>
       </Router>
