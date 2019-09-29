@@ -6,8 +6,15 @@ import PadawansInProgress from './components/Expert/PadawansInProgress'
 import Order from './components/Expert/Order'
 import Padawan from './components/Expert/Padawan'
 import PadawansList from './components/Expert/PadawansList'
+
 import Dashboard from './components/HR/Dashboard'
 import NewOrder from './components/HR/NewOrder'
+import NewOrders from './components/HR/NewOrders'
+import Employees from './components/HR/Employees'
+import EmployeeInfo from './components/HR/EmployeeInfo'
+import Positions from './components/HR/Positions'
+import Experts from './components/HR/Experts'
+import ExpertInfo from './components/HR/ExpertInfo'
 
 import './App.css';
 
@@ -16,7 +23,8 @@ const App = () => (
   <Router>      
     <Switch>
       <Route 
-        path='/expert' 
+        path='/expert'
+        exact
         render={() => <Layout title='Дашбоард' role="expert"><PadawansInProgress /></Layout>} 
       />
       <Route 
@@ -48,11 +56,43 @@ const App = () => (
         </Layout>} 
       />
       <Route 
-        path='/new_order/:id' 
+        path='/employees' 
         render={() => <Layout title='Сотрудники'  role="hr">
-          <NewOrder />
+          <Employees />
         </Layout>
         } 
+      />
+      <Route 
+        path='/employee/:id' 
+        render={() => <Layout title='Сотрудник'  role="hr">
+          <EmployeeInfo />
+        </Layout>
+        } 
+      />
+      <Route 
+        path='/new_orders' 
+        render={() => <Layout title='Новые заявки'  role="hr">
+          <NewOrders />
+        </Layout>
+        } 
+      />
+      <Route 
+        path='/positions' 
+        render={() => <Layout title='Должности'  role="hr">
+          <Positions />
+        </Layout>
+        } 
+      />
+      <Route 
+        path='/experts' 
+        render={() => <Layout title="Эксперты"  role="hr">
+          <Experts />
+        </Layout>
+        } 
+      />
+      <Route 
+        path='/expert/:id'
+        render={() => <Layout title='Эксперт' role="hr"><ExpertInfo /></Layout>} 
       />
     </Switch>
   </Router>

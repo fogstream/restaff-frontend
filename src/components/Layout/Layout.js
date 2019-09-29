@@ -104,26 +104,44 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ExpertLinks = ({ className }) => [
-  {href: '/expert', title: 'Дашбоард'},
-  {href: '/order', title: 'Создание заявки'},
-  {href: '/padawans', title: 'Падаваны'},
-].map((item, index) => (
-  <NavLink 
-    key={item.href} 
-    to={item.href} 
-    className={className} 
-    activeStyle={{
-      fontWeight: "bold",
-      color: "red"
-    }} 
-  >
-    <ListItem button >
-      <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-      <ListItemText primary={item.title} />
-    </ListItem>
-  </NavLink>
-))
+const mapLinksToMenu = (linksArray, className) => {
+  return linksArray.map((item, index) => (
+    <NavLink 
+      key={item.href} 
+      to={item.href} 
+      className={className} 
+      activeStyle={{
+        fontWeight: "bold",
+        color: "red"
+      }} 
+    >
+      <ListItem button >
+        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+        <ListItemText primary={item.title} />
+      </ListItem>
+    </NavLink>
+  ))
+}
+
+const ExpertLinks = ({ className }) => {
+  const links = [
+    {href: '/expert', title: 'Дашбоард'},
+    {href: '/order', title: 'Создание заявки'},
+    {href: '/padawans', title: 'Падаваны'},
+  ]
+  return mapLinksToMenu(links, className)
+}
+
+const HRLinks = ({className}) => {
+  const links = [
+    {href: '/hr', title: 'Дашбоард'},
+    {href: '/employees', title: 'Сотрудники'},
+    {href: '/new_orders', title: 'Новые заявки'},
+    {href: '/positions', title: 'Должности'},
+    {href: '/experts', title: 'Эксперты'},
+  ]
+  return mapLinksToMenu(links, className)
+}
 
 export const Layout = withRouter(
   ({ children, title, role }) => {
@@ -137,7 +155,8 @@ export const Layout = withRouter(
   };
 
   const mapLinksWithRole = {
-    expert: <ExpertLinks className={classes.links} />
+    expert: <ExpertLinks className={classes.links} />,
+    hr: <HRLinks className={classes.links} />
   }
 
   return (
