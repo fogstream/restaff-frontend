@@ -15,6 +15,7 @@ import EmployeeInfo from './components/HR/EmployeeInfo'
 import Positions from './components/HR/Positions'
 import Experts from './components/HR/Experts'
 import ExpertInfo from './components/HR/ExpertInfo'
+import PositionInfo from './components/HR/PositionInfo'
 
 import './App.css';
 
@@ -93,6 +94,10 @@ const App = () => (
       <Route 
         path='/expert/:id'
         render={() => <Layout title='Эксперт' role="hr"><ExpertInfo /></Layout>} 
+      />
+      <Route 
+        path='/position/:id'
+        render={() => <Layout title='Должность' role="hr"><PositionInfo /></Layout>} 
       />
     </Switch>
   </Router>
