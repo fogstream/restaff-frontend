@@ -20,6 +20,8 @@ import PositionInfo from './components/HR/PositionInfo'
 import Login from './components/Login'
 import EmployeeDashboard from './components/Employee/EmployeeDashboard';
 import EmployeeProfile from './components/Employee/EmployeeProfile';
+import VacancyInfo from './components/Employee/VacancyInfo'
+import Vacancies from './components/Employee/Vacancies'
 
 import './App.css';
 
@@ -124,6 +126,14 @@ const App = () => {
           <Route 
             path='/profile'
             render={() => <Layout title='Профиль' role="employee"><EmployeeProfile /></Layout>} 
+          />
+          <Route 
+            path='/vacancies'
+            render={() => <Layout title='Вакансии' role="employee"><Vacancies /></Layout>} 
+          />
+          <Route 
+            path='/vacancy/:id'
+            render={() => <Layout title='Вакансия' role="employee"><NewOrder /></Layout>} 
           />
         </Switch>
       </Router>

@@ -147,6 +147,7 @@ const EmployeeLinks = ({className}) => {
   const links = [
     {href: '/employee', title: 'Дашбоард'},
     {href: '/profile', title: 'Профиль'},
+    {href: '/vacancies', title: 'Вакансии'},
     {href: '/positions', title: 'Должности'},
   ]
   return mapLinksToMenu(links, className)
