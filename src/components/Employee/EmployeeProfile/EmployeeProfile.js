@@ -18,6 +18,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import EmployeeInfo from '../../HR/EmployeeInfo'
 import { deepOrange } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
@@ -63,7 +64,8 @@ const useStyles = makeStyles(theme => ({
 const profileInfo = {
   name: 'Рита Емельянова',
   currentPosition: 'Бухгалтер',
-  currentSalary: 40000
+  currentSalary: 40000,
+  isRequalifying: true
 }
 
 const competencies = [

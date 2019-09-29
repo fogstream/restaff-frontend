@@ -14,6 +14,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import EmployeeInfo from '../../HR/EmployeeInfo';
 
 const useStyles = makeStyles(theme => ({
   dashboard: {
@@ -83,15 +84,19 @@ const notifications = [
       }
     },
 ]
-const currentPositionInfo = {
-  name: 'Бухгалтер',
+const employeeInfo = {
+  position: 'Бухгалтер',
   experience: 6,
   currentRequirements: [
     'Математика',
     'Программирование'
-  ]
+  ],
 }
 
+const requalifyingInfo = {
+  isRequalifying: true,
+  position: 'Программист Python'
+}
 
 export default function SimpleTable() {
   const classes = useStyles();
@@ -100,16 +105,16 @@ export default function SimpleTable() {
     <div className={classes.dashboard}>
       <Paper className={[classes.root, classes.currentPosition]}>
         <Typography component="h2" variant="h6" color="primary" gutterBottom>
-          Должность: {currentPositionInfo.name}
+          Должность: {employeeInfo.position}
         </Typography>
-        <Typography component="p">Стаж: {currentPositionInfo.experience} лет</Typography>
+        <Typography component="p">Стаж: {employeeInfo.experience} лет</Typography>
         <List subheader={
           <ListSubheader component="div">
             Текущие компетенции
           </ListSubheader>
         } className={classes.currentRequirements}>
           {
-            currentPositionInfo.currentRequirements.map((req, idx) => (
+            employeeInfo.currentRequirements.map((req, idx) => (
               <>
               <ListItem>
                 <ListItemText
@@ -117,12 +122,13 @@ export default function SimpleTable() {
                   alignItems="left"
                 />
               </ListItem>
-              {(idx + 1) < currentPositionInfo.currentRequirements.length && <Divider component="li" />}
+              {(idx + 1) < employeeInfo.currentRequirements.length && <Divider component="li" />}
               </>
             ))
           }
         </List>
       </Paper>
+      
       <Paper className={[classes.root, classes.notifications]}>
         <Typography component="h2" variant="h6" color="primary" gutterBottom>
           Новые вакансии
@@ -156,6 +162,15 @@ export default function SimpleTable() {
           </TableBody>
         </Table>
       </Paper>
+
+      {requalifyingInfo.isRequalifying && (
+        <Paper className={classes.root}>
+          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+            Переквалификация: {requalifyingInfo.position}
+          </Typography>
+          <EmployeeInfo />
+        </Paper>
+      )}
     </div>
   );
 }
