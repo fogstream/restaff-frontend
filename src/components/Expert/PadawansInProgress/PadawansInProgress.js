@@ -9,6 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Grid} from '@material-ui/core'
 
+import { MyContext } from '../../../App.js'
+
 const useStyles = makeStyles(theme => ({
   root: {
     overflowX: 'auto',
@@ -40,6 +42,8 @@ const rows = [
 
 export default function SimpleTable() {
   const classes = useStyles();
+  const state = React.useContext(MyContext)
+  console.log(state)
 
   return (
     <Paper className={classes.root}>
